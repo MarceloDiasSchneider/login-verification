@@ -15,7 +15,7 @@
     <div class="container ">
         <div class="row justify-content-center align-items-center">
             <div>
-                <h1>Test with password_hash</h1>
+                <h1>Test password_hash</h1>
             </div>
             <div>
                 <?php
@@ -25,20 +25,21 @@
                     $password = $_POST['login-password'];
                     
                     try {
-                        $statement = $conn->prepare("SELECT * FROM `users` WHERE `email`='$email' AND `password`='$cryptPassword'");
+                        $statement = $conn->prepare("SELECT * FROM `users` WHERE `email`='$email'");
                         $statement->execute();
                         $rows = $statement->rowCount();
+                        echo $rows;
                         $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
                         
                         if($rows == 1){
                             foreach ($statement->fetchAll() as $key => $value) {
-                                if( password_verify($password, $value['email'] ){
+                                if( password_verify($password, $value['email'] )){
                                     echo '<h3>Welcome back '.$value['name'].'</h3>';
                                     echo "<p>You are logged now!</p>";
                                 }
                             }
                         } else {
-                            header("Location: ../index2.html");
+                            //header("Location: ../index2.html");
                         }
                     } catch(PDOException $e){
                         echo 'We had a problems with your registration';
@@ -47,7 +48,7 @@
                     }
                     $conn = null;
                 ?>    
-                <a class="btn btn-primary" href="../index.html" role="button">Back</a>
+                <a class="btn btn-primary" href="../index2.html" role="button">Back</a>
             </div>
         </div>
     </div>
