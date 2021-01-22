@@ -44,7 +44,7 @@
                     }
                     $conn = null;
                 ?>
-                <a class="btn btn-primary" href="../index.php" role="button">Back</a>
+                <a class="btn btn-primary" href="../index.php" role="button">Logout</a>
             </div>
         </div>
     </div>

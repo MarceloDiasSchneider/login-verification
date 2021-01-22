@@ -4,11 +4,10 @@
     $email = $_POST['e'];
     $phone = $_POST['p'];
     $codice_fiscale = $_POST['c'];
-
     require 'conection.php';
     try {
         
-        $statement = $conn->prepare("UPDATE `login`.`users` SET `name`='$name', `email`='$email' WHERE `id`= 1;");
+        $statement = $conn->prepare("UPDATE `login`.`users` SET `name`='$name', `email`='$email' WHERE `id`=".$id);
         $statement->execute();
         
         $statement = $conn->prepare("SELECT id_user FROM `phone` WHERE id_user = $id");

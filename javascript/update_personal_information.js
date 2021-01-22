@@ -1,5 +1,12 @@
-document.querySelector('#personal-information').addEventListener('click', () => { update_paswword()})
+//document.querySelector('#personal-information').addEventListener('click', () => { update_paswword()})
+$(document).ready(function(){
+    $("#test").submit(function( event ){
+      alert("Submitted");
+      event.preventDefault();
+    });
+});
 
+/*
 function update_paswword(){
 
     let id = document.querySelector('#id').value
@@ -17,6 +24,7 @@ function update_paswword(){
     }
     
     /* using jQuery to comunicate with PHP */
+    /*
     $.post('update_personal_information.php', dataToUpdate, function(phpReturns, state){
         if(state == 'success'){
             if( phpReturns !== 'error'){
@@ -33,3 +41,4 @@ function update_paswword(){
         }
     })
 }
+*/

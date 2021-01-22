@@ -8,14 +8,14 @@
 </head>
 <?php require_once '/php/header.php';
     session_start();
-    session_destroy();
+    print_r($_SESSION);
 ?>
 <body>
     <div class="container">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-5">
                 <h3>Login</h3>
-                <form action="php/login.php" method="POST">
+                <form action="php/authentication.php" method="POST">
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="email" class="form-control" id="login-email" name="login-email" aria-describedby="alert" placeholder="exemplo@gmail.com" required>
