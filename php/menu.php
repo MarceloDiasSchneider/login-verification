@@ -11,7 +11,6 @@
         require_once 'session_verify.php';
 
         require_once 'header.php';
-        print_r($_SESSION);
         
     ?> 
     <div class="container ">

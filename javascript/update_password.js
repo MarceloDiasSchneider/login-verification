@@ -1,6 +1,11 @@
-document.querySelector('#password').addEventListener('click', () => { update_personal_information()})
+$(document).ready(function(){
+    $("#update_password").submit(function( event ){
+        update_paswword()
+      event.preventDefault();
+    });
+});
 
-function update_personal_information(){
+function update_paswword(){
     let id = document.querySelector('#id').value
     let last_password = document.querySelector('#last-password').value
     let new_password = document.querySelector('#new-password').value

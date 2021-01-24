@@ -12,7 +12,6 @@
         require_once 'session_verify.php';
         
         require_once 'header.php'; 
-        print_r($_SESSION);
         
         require 'conection.php';
         $statement = $conn->prepare("SELECT * FROM users
@@ -48,11 +47,11 @@
                 <a class="btn btn-primary" href="login.php" role="button">Menu</a>
                 <a class="btn btn-primary" href="close_session.php" role="button">Logout</a>
                 <h2>Personal information</h2>
-                <form id='test' action="update_personal_information.php" method="POST">
+                <form id="update_personal_information" action="update_personal_information.php" method="POST">
                     <input id='id' type="number" value="<?php echo $_SESSION['id'] ?>" style="display: none">
                     <div class="form-group">
                         <label for="Name">Full name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Full name" maxlength="25" value="<?php echo $name ?>" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Full name" pattern="[A-z ]{5,25}" title="Minimum 5 characters, letters only" maxlength="25" value="<?php echo $name ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
@@ -60,63 +59,63 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Cell phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="+39 999 999 9999" maxlength="20" value="<?php echo $phone ?>" required>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="+39 999 999 9999" pattern="[0-9 +]{10,16}" title="Type your phone" maxlength="16" value="<?php echo $phone ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="codice-fiscale">Codice fiscale</label>
-                        <input type="text" class="form-control" id="codice-fiscale" name="codice-fiscale" placeholder="codice-fiscale" maxlength="16" value="<?php echo $codice_fiscale ?>" required>
+                        <input type="text" class="form-control" id="codice-fiscale" name="codice-fiscale" placeholder="codice-fiscale" pattern="[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]" title="Type your codice fiscale" maxlength="25" value="<?php echo $codice_fiscale ?>" required>
                     </div>
                     <div id='personal-information-message' class="" role="alert"></div>
-                    <input type="submit" id="personal-information" class="btn btn-primary" value="Update">
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </form>
                 
                 <h2>Change password</h2>
-                <form action="" method="POST">
+                <form id="update_password" action="update_password.php" method="POST">
                     <div class="form-group">
                         <label for="last-password">Last password</label>
-                        <input type="password" class="form-control" id="last-password" name="last-password" placeholder="Last password" maxlength="25" required>
+                        <input type="password" class="form-control" id="last-password" name="last-password" placeholder="Last password" pattern="[A-z0-9]{5,20}" title="Minimum 5 characters, letters and numbers only" maxlength="20" required>
                     </div> 
                     <div class="form-group">
                         <label for="new-password">New password</label>
-                        <input type="password" class="form-control" id="new-password" name="new-password" placeholder="New password" maxlength="25" required>
+                        <input type="password" class="form-control" id="new-password" name="new-password" placeholder="New password" pattern="[A-z0-9]{5,20}" title="Minimum 5 characters, letters and numbers only" maxlength="20" maxlength="25" required>
                     </div> 
                     <div class="form-group">
                         <label for="repeat-new-password">Repet new assword</label>
-                        <input type="password" class="form-control" id="repeat-new-password" name="repeat-new-password" placeholder="Repet new assword" maxlength="25" required>
+                        <input type="password" class="form-control" id="repeat-new-password" name="repeat-new-password" placeholder="Repet new assword" pattern="[A-z0-9]{5,20}" title="Minimum 5 characters, letters and numbers only" maxlength="20" maxlength="25" required>
                         <small id="alert" class="form-text text-muted">We'll never share your password with anyone else.</small>
                     </div> 
                     <div id='password-message' class="" role="alert"></div>
-                    <button type="button" id="password" class="btn btn-primary">Update</button>
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </form>
 
                 <h2>Address</h2>
-                <form action="" method="POST">
+                <form id="update_adderss" action="update_address.php" method="POST">
                     <div class="form-group">
                         <label for="country">Country</label>
-                        <input type="text" class="form-control" id="country" name="country" placeholder="Country" maxlength="60" value="<?php echo $country; ?>" required>
+                        <input type="text" class="form-control" id="country" name="country" placeholder="Country" pattern="[A-z ]{3,60}" title="Minimum 3 characters, letters only" maxlength="60" value="<?php echo $country; ?>" required>
                     </div> 
                     <div class="form-group">
                         <label for="region">Region</label>
-                        <input type="text" class="form-control" id="region" name="region" placeholder="Region" maxlength="60" value="<?php echo $region; ?>" required>
+                        <input type="text" class="form-control" id="region" name="region" placeholder="Region" pattern="[A-z ]{3,60}" title="Minimum 3 characters, letters only" maxlength="60" value="<?php echo $region; ?>" required>
                     </div> 
                     <div class="form-group">
                         <label for="city">City</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="City" maxlength="60" value="<?php echo $city; ?>" required>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="City" pattern="[A-z ]{3,60}" title="Minimum 3 characters, letters only" maxlength="60" value="<?php echo $city; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="postcode">Postcode</label>
-                        <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode" maxlength="10" value="<?php echo $postcode; ?>" required>
+                        <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode" pattern="[0-9]{5}" title="Must have 5 characters, numbers only" maxlength="5" value="<?php echo $postcode; ?>" required>
                     </div> 
                     <div class="form-group">
                         <label for="address1">Address line 1</label>
-                        <input type="text" class="form-control" id="address1" name="address1" placeholder="Address line 1" maxlength="100" value="<?php echo $address1; ?>" required>
+                        <input type="text" class="form-control" id="address1" name="address1" placeholder="Address line 1" pattern="[A-z0-9 ]{5,100}" title="Minimum 5 characters, letters and numbers only" maxlength="100" value="<?php echo $address1; ?>" required>
                     </div> 
                     <div class="form-group">
                         <label for="address2">Address line 2</label>
-                        <input type="text" class="form-control" id="address2" name="address2" placeholder="Address line 2" maxlength="100" value="<?php echo $address2; ?>" required>
+                        <input type="text" class="form-control" id="address2" name="address2" placeholder="Address line 2" pattern="[A-z0-9 ]{5,100}" title="Minimum 5 characters, letters and numbers only" maxlength="100" value="<?php echo $address2; ?>" required>
                     </div> 
                     <div id='address-message' class="" role="alert"></div>
-                    <button type="button" id="address" class="btn btn-primary">Update</button>
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </form>
             </div>  
         </div>

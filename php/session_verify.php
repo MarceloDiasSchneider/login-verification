@@ -10,4 +10,6 @@
     } else {  
         header("Location: close_session.php");
     }
+    //print_r($_SESSION);
+
 ?>  

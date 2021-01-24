@@ -8,7 +8,28 @@
 </head>
 <?php require_once '/php/header.php';
     session_start();
-    print_r($_SESSION);
+    
+    $emailValue ='';
+    $passwordValue ='';
+    $emailMessage = '';
+    $passwordMessage = '';
+
+    if(isset($_SESSION['email'])){
+        $emailValue = $_SESSION['email'];
+    } 
+
+    if(isset($_SESSION['password'])){
+        $passwordValue = $_SESSION['password'];
+    } 
+
+    if(isset($_SESSION['emailError'])){
+        $emailMessage = '<small>'.$_SESSION['emailError'].'</small>';
+    }     
+
+    if(isset($_SESSION['passwordError'])){
+        $passwordMessage = '<small>'.$_SESSION['passwordError'].'</small>';
+    } 
+
 ?>
 <body>
     <div class="container">
@@ -18,11 +39,13 @@
                 <form action="php/authentication.php" method="POST">
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="login-email" name="login-email" aria-describedby="alert" placeholder="exemplo@gmail.com" required>
+                        <input type="email" class="form-control" id="login-email" name="login-email" aria-describedby="alert" placeholder="exemplo@gmail.com" maxlength="60" value="<?php echo $emailValue ?>" required>
+                        <?php echo $emailMessage; ?>
                     </div>
                     <div class="form-group">
                         <label for="login-password">Password</label>
-                        <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password" required>
+                        <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password" pattern="[A-z0-9]{5,20}" title="From 5 to 20 characters only letter and numbers" maxlength="20" value="<?php echo $passwordValue; ?>" required>
+                        <?php echo $passwordMessage; ?>
                     </div> 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -36,7 +59,7 @@
                 <form action="php/register.php" method="POST">
                     <div class="form-group">
                         <label for="Name">Full name</label>
-                        <input type="text" class="form-control" id="register-name" name="register-name" aria-describedby="alert" placeholder="Full name" maxlength="25" required>
+                        <input type="text" class="form-control" id="register-name" name="register-name" aria-describedby="alert" placeholder="Full name" pattern="[A-z ]{5,25}" title="From 5 to 25 characters only letter" maxlength="25" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
@@ -44,7 +67,7 @@
                     </div>
                     <div class="form-group">
                         <label for="register-password">Password</label>
-                        <input type="password" class="form-control" id="register-password" name="register-password" placeholder="Password" maxlength="25" required>
+                        <input type="password" class="form-control" id="register-password" name="register-password" placeholder="Password" pattern="[A-z0-9]{5,20}" title="From 5 to 20 characters only letter and numbers" maxlength="20" required>
                         <small id="alert" class="form-text text-muted">We'll never share your password with anyone else.</small>
                     </div> 
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -52,5 +75,6 @@
             </div>
         </div>
     </div>
+    <?php session_unset(); ?>
 </body>
 </html>

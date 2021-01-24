@@ -1,4 +1,9 @@
-document.querySelector('#address').addEventListener('click', () => { update_adderss()})
+$(document).ready(function(){
+    $("#update_adderss").submit(function( event ){
+        update_adderss()
+      event.preventDefault();
+    });
+});
 
 function update_adderss(){
     let id = document.querySelector('#id').value
