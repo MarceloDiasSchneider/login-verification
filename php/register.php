@@ -24,14 +24,16 @@
                     $salt = 'mds';
                     $cryptPassword = crypt($password, $salt);
 
-                    // echo $cryptPassword;
+                    $timezone = new DateTimeZone('Europe/Rome');
+                    $now = new DateTime('now', $timezone);
+                    $dateTime = $now->format('Y-m-d H:i:s');
 
                     try {
-                        $statement = $conn->prepare("INSERT INTO `login`.`users` (`name`, `email`, `password`) VALUES ('$name', '$email', '$cryptPassword')");
+                        $statement = $conn->prepare("INSERT INTO `login`.`users` (`name`, `email`, `password`, `date_registred`) VALUES ('$name', '$email', '$cryptPassword', '$dateTime')");
                         $statement->execute();
-                        
+                        $last_id = $conn->lastInsertId();
                         $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-
+                        
                         echo "<h3>Welcome</h3>";
                         echo "<p>You are registered successfully</p>";
                     } catch(PDOException $e){

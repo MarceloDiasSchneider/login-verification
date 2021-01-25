@@ -3,7 +3,6 @@
     session_unset();
         $email = $_POST['login-email'];
         $password = $_POST['login-password'];
-        $pw = $password;
         $salt = 'mds';
         $cryptPassword = crypt($password, $salt);
         require 'conection.php';
@@ -29,14 +28,12 @@
                     }
                 } else {
                     $_SESSION["email"] = $email;
-                    $_SESSION["password"] = $pw;
-                    $_SESSION["passwordError"] = "This password daesn't match with email!";
+                    $_SESSION["passwordError"] = "The password daesn't match with email!";
                     header("Location: ../index.php");
                     echo $_SESSION['password'].'1oi';
                 }
             } else {
                 $_SESSION["email"] = $email;
-                $_SESSION["password"] = $pw;
                 $_SESSION["emailError"] = "This email is not registred!";
                 header("Location: ../index.php");
             }

@@ -27,10 +27,10 @@ function update_personal_information(){
             if( phpReturns !== 'error'){
                 let personal_information_message = document.querySelector("#personal-information-message")
                 personal_information_message.innerHTML = phpReturns
-                personal_information_message.classList.add('alert','alert-primary')
+                personal_information_message.classList.add('alert','alert-success')
                 setTimeout(function(){ 
                     personal_information_message.innerHTML = ''
-                    personal_information_message.classList.remove('alert','alert-primary')
+                    personal_information_message.classList.remove('alert','alert-success')
                 }, 3000);
             }
         } else {

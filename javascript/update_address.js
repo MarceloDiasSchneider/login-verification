@@ -28,10 +28,10 @@ function update_adderss(){
         if(state == 'success'){
             let address_message = document.querySelector("#address-message")
             address_message.innerHTML = phpReturns
-            address_message.classList.add('alert','alert-primary')
+            address_message.classList.add('alert','alert-success')
             setTimeout(function(){ 
                 address_message.innerHTML = ''
-                address_message.classList.remove('alert','alert-primary')
+                address_message.classList.remove('alert','alert-success')
             }, 3000);
         } else {
             document.querySelector("#address-message").innerHTML = 'We had a problem to connect with PHP'

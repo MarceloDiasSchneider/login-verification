@@ -24,10 +24,10 @@ function update_paswword(){
             if( phpReturns !== 'error'){
                 let password_message = document.querySelector("#password-message")
                 password_message.innerHTML = phpReturns
-                password_message.classList.add('alert','alert-primary')
+                password_message.classList.add('alert','alert-success')
                 setTimeout(function(){ 
                     password_message.innerHTML = ''
-                    password_message.classList.remove('alert','alert-primary')
+                    password_message.classList.remove('alert','alert-success')
                 }, 3000);
             }
         } else {

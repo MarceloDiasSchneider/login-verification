@@ -20,9 +20,7 @@
                     echo $msg1;
                     echo $msg2;
                 ?>
-                <a class="btn btn-primary" href="my_profile.php" role="button">My profile</a>
-                <a class="btn btn-primary" href="close_session.php" role="button">Logout</a>
-            </div>
+            </div>    
         </div>
     </div>
 </body>

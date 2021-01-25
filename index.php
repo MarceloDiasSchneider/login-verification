@@ -6,9 +6,17 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
-<?php require_once '/php/header.php';
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Toolbar nave</a>
+        </div>
+    </nav>
+</header>
+<?php 
+    //require_once 'php/header.php';
     session_start();
-    
+    // print_r($_SESSION);
     $emailValue ='';
     $passwordValue ='';
     $emailMessage = '';
@@ -23,11 +31,25 @@
     } 
 
     if(isset($_SESSION['emailError'])){
-        $emailMessage = '<small>'.$_SESSION['emailError'].'</small>';
+        $emailMessage = "
+        <div class='form-group'>
+            <div class='input-group  mb-3'>
+                <div id='personal-information-message' class='alert alert-danger' role='alert'>
+                    <small>".$_SESSION['emailError']."</small>'
+                </div>
+            </div>
+        </div>";
     }     
 
     if(isset($_SESSION['passwordError'])){
-        $passwordMessage = '<small>'.$_SESSION['passwordError'].'</small>';
+        $passwordMessage = "
+        <div class='form-group'>
+            <div class='input-group  mb-3'>
+                <div id='personal-information-message' class='alert alert-danger' role='alert'>
+                    <small>".$_SESSION['passwordError']."</small>'
+                </div>
+            </div>
+        </div>";
     } 
 
 ?>
@@ -38,16 +60,23 @@
                 <h3>Login</h3>
                 <form action="php/authentication.php" method="POST">
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="login-email" name="login-email" aria-describedby="alert" placeholder="exemplo@gmail.com" maxlength="60" value="<?php echo $emailValue ?>" required>
-                        <?php echo $emailMessage; ?>
+                        <div class="input-group mb-3">
+                        <span class="input-group-text">Email</span>
+                            <input type="email" class="form-control" id="login-email" name="login-email" aria-describedby="alert" placeholder="exemplo@gmail.com" maxlength="60" value="<?php echo $emailValue ?>" required>
+                        </div>
                     </div>
+                        <?php echo $emailMessage; ?>
                     <div class="form-group">
-                        <label for="login-password">Password</label>
-                        <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password" pattern="[A-z0-9]{5,20}" title="From 5 to 20 characters only letter and numbers" maxlength="20" value="<?php echo $passwordValue; ?>" required>
+                        <div class="input-group mb-3">
+                        <span class="input-group-text">Password</span>
+                            <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password" pattern="[A-z0-9]{5,20}" title="From 5 to 20 characters only letter and numbers" maxlength="20" value="<?php echo $passwordValue; ?>" required>
+                        </div> 
+                    </div> 
                         <?php echo $passwordMessage; ?>
                     </div> 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="input-group mb-5 ">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -57,24 +86,34 @@
             <div class="col-md-5">
                 <h3>Register</h3>
                 <form action="php/register.php" method="POST">
-                    <div class="form-group">
-                        <label for="Name">Full name</label>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                    <span class="input-group-text">Full name</span>
                         <input type="text" class="form-control" id="register-name" name="register-name" aria-describedby="alert" placeholder="Full name" pattern="[A-z ]{5,25}" title="From 5 to 25 characters only letter" maxlength="25" required>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email address</label>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                    <span class="input-group-text">Email address</span>
                         <input type="email" class="form-control" id="register-email" name="register-email" aria-describedby="alert" placeholder="exemplo@gmail.com" maxlength="60" required>
                     </div>
-                    <div class="form-group">
-                        <label for="register-password">Password</label>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-1">
+                    <span class="input-group-text">Password</span>
                         <input type="password" class="form-control" id="register-password" name="register-password" placeholder="Password" pattern="[A-z0-9]{5,20}" title="From 5 to 20 characters only letter and numbers" maxlength="20" required>
+                    </div> 
+                    <div class="input-group mb-3">
                         <small id="alert" class="form-text text-muted">We'll never share your password with anyone else.</small>
                     </div> 
+                </div> 
+                <div class="input-group mb-3">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+                </div> 
+            </form>
         </div>
     </div>
-    <?php session_unset(); ?>
+</div>
+<?php session_unset(); ?>
 </body>
 </html>
