@@ -14,9 +14,8 @@
     </nav>
 </header>
 <?php 
-    //require_once 'php/header.php';
     session_start();
-    // print_r($_SESSION);
+
     $emailValue ='';
     $passwordValue ='';
     $emailMessage = '';
@@ -58,7 +57,7 @@
         <div class="row justify-content-center align-items-center">
             <div class="col-md-5">
                 <h3>Login</h3>
-                <form action="php/authentication.php" method="POST">
+                <form action="php/session_authentication.php" method="POST">
                     <div class="form-group">
                         <div class="input-group mb-3">
                         <span class="input-group-text">Email</span>
@@ -68,14 +67,15 @@
                         <?php echo $emailMessage; ?>
                     <div class="form-group">
                         <div class="input-group mb-3">
-                        <span class="input-group-text">Password</span>
+                            <span class="input-group-text">Password</span>
                             <input type="password" class="form-control" id="login-password" name="login-password" placeholder="Password" pattern="[A-z0-9]{5,20}" title="From 5 to 20 characters only letter and numbers" maxlength="20" value="<?php echo $passwordValue; ?>" required>
                         </div> 
                     </div> 
-                        <?php echo $passwordMessage; ?>
-                    </div> 
-                    <div class="input-group mb-5 ">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                    <?php echo $passwordMessage; ?>
+                    <div class="form-group">
+                        <div class="input-group mb-5 ">
+                            <input type="submit" class="btn btn-primary" value="Login">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -107,8 +107,10 @@
                         <small id="alert" class="form-text text-muted">We'll never share your password with anyone else.</small>
                     </div> 
                 </div> 
-                <div class="input-group mb-3">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <input type="submit" class="btn btn-primary" value="Register">
+                    </div> 
                 </div> 
             </form>
         </div>

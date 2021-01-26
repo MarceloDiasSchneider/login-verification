@@ -1,5 +1,6 @@
 <?php
     session_start();
+
     if (isset($_SESSION['started'])){
         if($_SESSION['started'] == 'true'){
             $msg1 = '<h3>Keep working '.$_SESSION['name'].'</h3>';
@@ -10,6 +11,5 @@
     } else {  
         header("Location: close_session.php");
     }
-    //print_r($_SESSION);
 
 ?>  

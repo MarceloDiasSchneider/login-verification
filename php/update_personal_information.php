@@ -38,11 +38,7 @@
             $statement->execute();
         }
         echo "<small>Update successful</small>";
-        
-        // $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-        // foreach ($statement->fetchAll() as $key => $value) {
-        //     echo $value[''];
-        // }
+
     } catch(PDOException $e){
         echo 'We had a problems with your registration: Error code'.$e->getCode();
         echo $e->getMessage();

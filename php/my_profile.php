@@ -37,6 +37,9 @@
             $address1 = $value['address1'];
             $address2 = $value['address2'];
         }
+        $date_registration = new DateTime($date_registration);
+        $date_registration = $date_registration->format('d/m/Y H:i:s');
+
     ?>
     <div class="container ">
         <div class="row justify-content-center align-items-center">
@@ -46,7 +49,13 @@
                     echo $msg2;
                 ?>
                 <h2>Personal information</h2>
-                <p><?php echo "Date of registrition: $date_registration" ?></p>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <?php echo "Date of registrition: $date_registration" ?>
+                        </span>
+                    </div>
+                </div>
                 <form id="update_personal_information" action="update_personal_information.php" method="POST">
                     <input id='id' type="number" value="<?php echo $_SESSION['id'] ?>" style="display: none">
                     <div class="form-group">
@@ -74,8 +83,10 @@
                         </div>
                     </div>
                     <div id='personal-information-message' class="" role="alert"></div>
-                    <div class="input-group mb-5">
-                        <input type="submit" class="btn btn-primary" value="Update">
+                    <div class="form-group">
+                        <div class="input-group mb-5">
+                            <input type="submit" class="btn btn-primary" value="Update">
+                        </div>
                     </div>
                 </form>
             </div>    
@@ -108,8 +119,10 @@
                         </div> 
                     </div>
                     <div id='password-message' class="" role="alert"></div>
-                    <div class="input-group mb-5">
-                        <input type="submit" class="btn btn-primary" value="Update">
+                    <div class="form-group">
+                        <div class="input-group mb-5">
+                            <input type="submit" class="btn btn-primary" value="Update">
+                        </div>
                     </div>
                 </form>
             </div> 
@@ -157,8 +170,10 @@
                         </div> 
                     </div> 
                     <div id='address-message' class="" role="alert"></div>
-                    <div class="input-group mb-5">
-                        <input type="submit" class="btn btn-primary" value="Update">
+                    <div class="form-group">
+                        <div class="input-group mb-5">
+                            <input type="submit" class="btn btn-primary" value="Update">
+                        </div> 
                     </div> 
                 </form>
             </div>  

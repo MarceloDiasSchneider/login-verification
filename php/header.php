@@ -17,7 +17,7 @@
                         <a class="btn btn-primary" href="menu.php" role="button">Menu</a>
                     </div>
                     <div class="col-md">
-                        <a class="btn btn-primary" href="close_session.php" role="button">Logout</a>
+                        <a class="btn btn-primary" href="session_close.php" role="button">Logout</a>
                     </div>
                 </div>
             </div>
