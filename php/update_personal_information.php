@@ -40,7 +40,7 @@
         echo "<small>Update successful</small>";
 
     } catch(PDOException $e){
-        echo 'We had a problems with your registration: Error code'.$e->getCode();
+        echo 'We had a problems: Error code'.$e->getCode();
         echo $e->getMessage();
     }
     $conn = null;

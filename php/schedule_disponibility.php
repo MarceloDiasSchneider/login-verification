@@ -1,5 +1,6 @@
 <?php
 
+    $id_user = $_POST['i'];
     $date = $_POST['d'];
     $hourInitial = '00:00:00';
     $hourFinal = '23:59:59';
@@ -33,17 +34,13 @@
     try {
         $disponibility = array();
         foreach ($datesToTest as $dateTest) {
-            $statement = $conn->prepare("SELECT `date` FROM `schedule` WHERE `date` = '$dateTest'");
+            $statement = $conn->prepare("SELECT `date` FROM `schedule` WHERE `date` = '$dateTest' AND `id_user` = '$id_user'");
             $statement->execute();
             $rows = $statement->rowCount();
         
             if($rows == 1){
                 // $disponibility[] = 'Don't use =>'.$dateTest ;
             } else {
-                // $hourOption = date('H:i:s', $dateTest);
-                // $hourOption = new date($dateTest);
-                // echo $dateTest;
-                // $dateTest = strtotime($dateTest);
                 $dateTest = new DateTime($dateTest);
                 $dateTest = $dateTest->format('H:i:s');
                 $disponibility[] = $dateTest;
