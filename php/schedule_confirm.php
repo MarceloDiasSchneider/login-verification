@@ -8,12 +8,13 @@
     
     /* prepare the date to insert */
     $date = str_replace("/","-",$date);
-    $datetime = date('Y-m-d H:i:s', strtotime("$date $time"));
+    $datetimeStart = date('Y-m-d H:i:s', strtotime("$date $time"));
+    $datetimeEnd = date('Y-m-d H:i:s', strtotime("$date $time"));
     
     require 'conection.php';
     
     try {
-        $statement = $conn->prepare("INSERT INTO `schedule` (`id_user`, `date`, `description`) VALUES ($id, '$datetime', '$description')");
+        $statement = $conn->prepare("INSERT INTO `schedule` (`id_user`, `datetimeStart`, `datetimeEnd`, `description`) VALUES ($id, '$datetimeStart', '$datetimeEnd', '$description')");
         $statement->execute();
         
         header("Location: schedule.php");

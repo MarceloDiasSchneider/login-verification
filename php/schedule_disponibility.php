@@ -34,7 +34,7 @@
     try {
         $disponibility = array();
         foreach ($datesToTest as $dateTest) {
-            $statement = $conn->prepare("SELECT `date` FROM `schedule` WHERE `date` = '$dateTest' AND `id_user` = '$id_user'");
+            $statement = $conn->prepare("SELECT `datetimeStart` FROM `schedule` WHERE `datetimeStart` = '$dateTest' AND `id_user` = '$id_user'");
             $statement->execute();
             $rows = $statement->rowCount();
         

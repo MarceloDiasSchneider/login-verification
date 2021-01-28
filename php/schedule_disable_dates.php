@@ -15,9 +15,9 @@
     require 'conection.php';
 
     try {
-        $statement = $conn->prepare("SELECT DISTINCT DATE(`date`) as `date` FROM `schedule` 
+        $statement = $conn->prepare("SELECT DISTINCT DATE(`datetimeStart`) as `date` FROM `schedule` 
         WHERE `id_user` = $id_user 
-        AND `date` BETWEEN '$initial' AND '$final'");
+        AND `datetimeStart` BETWEEN '$initial' AND '$final'");
         
         $statement->execute();
         $rows = $statement->rowCount();
@@ -25,9 +25,9 @@
         if($rows > 0){
             /* Verify all dates thas have schedule */
             foreach ($statement->fetchAll() as $key => $value) {
-                $statement = $conn->prepare("SELECT DATE(`date`) as `date`, COUNT(`date`) as `quantity` FROM `schedule` 
+                $statement = $conn->prepare("SELECT DATE(`datetimeStart`) as `date`, COUNT(`datetimeStart`) as `quantity` FROM `schedule` 
                 WHERE `id_user` = $id_user
-                AND `date` LIKE '".$value['date']."%'");
+                AND `datetimeStart` LIKE '".$value['date']."%'");
                 
                 $statement->execute();
                 $rows = $statement->rowCount();

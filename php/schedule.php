@@ -28,30 +28,7 @@
                     
                     /* Load all previus schedules */
                     require 'conection.php';
-                      
-                    try{
-                        $statement = $conn->prepare("SELECT `date`,`description` FROM `schedule` WHERE id_user =".$_SESSION['id']." ORDER BY `date`");
-                        $statement->execute();
-                        $rows = $statement->rowCount();
-                        if($rows > 0){
-                            echo "<h3>My schedules</h3>";
-                            foreach ($statement->fetchAll() as $key => $value) {
-                                $date = new DateTime($value['date']);
-                                $date = $date->format('d/m/Y H:i:s');
-                                echo "  <div class='form-group'>
-                                            <div class='input-group mb-3'>
-                                                <span class='input-group-text'>
-                                                    ".$date." ".$value['description']."
-                                                </span> 
-                                            </div>    
-                                        </div>";
-                            }
-                        }
-                    } catch(PDOException $e){
-                        echo 'We had a problems to conect with database: Error code'.$e->getCode();
-                        echo $e->getMessage();
-                    }
-                    
+                    require 'schedule_load_old.php';
                     $conn = null;
                 ?>
                 

@@ -24,7 +24,8 @@ function loadDesabledDate(){
     $.post('schedule_disable_dates.php', datesToVerify, function(phpReturns, state){
         if(state == 'success'){
             let object = JSON.parse(phpReturns)
-
+            // console.log(phpReturns)
+            
             /* Disable date that php returned */
             object.forEach(disablingDates);
             function disablingDates(item, index) {
