@@ -5,7 +5,7 @@ require 'conection.php';
 
 $schedules = array();
 try{
-    $statement = $conn->prepare("SELECT `datetimeStart`, `datetimeEnd`,`description` FROM `schedule` WHERE id_user =".$_SESSION['id']." ORDER BY `datetimeStart`");
+    $statement = $conn->prepare("SELECT `datetimeStart`, `datetimeEnd`,`title`, `description` FROM `schedule` WHERE id_user =".$_SESSION['id']." ORDER BY `datetimeStart`");
     $statement->execute();
     $rows = $statement->rowCount();
     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -14,6 +14,8 @@ try{
             $schedules[] = $value;
         }
         echo json_encode($schedules);
+    } else {
+        /* create a return if there isnt any schedule*/
     }
 } catch(PDOException $e){
     echo 'We had a problems to conect with database: Error code'.$e->getCode();

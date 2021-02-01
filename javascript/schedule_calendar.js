@@ -1,25 +1,24 @@
 /* Load schedules from datebase */
 let schedules = []
 let ready = false
-// let teste1 = []
-// let teste2 = []
-// teste2['eu'] = 'marcelo' 
-// teste1.push(teste2)
 
-// console.log(teste1[0]['eu'])
 function schedule_load(){
     $.post('schedule_load.php', function(phpReturns, state){
         if(state == 'success'){
             var jSonObject = JSON.parse(phpReturns)
+            // console.log(phpReturns)
+            
             jSonObject.forEach(pushItem);
             function pushItem(item, index) {
                 let schedule = []
                 schedule['datetimeStart'] = item['datetimeStart']
                 schedule['datetimeEnd'] = item['datetimeEnd']
+                schedule['title'] = item['title']
                 schedule['description'] = item['description']
                 schedules[index] = schedule
                 ready = true
                 displayDays(month,year)
+                console.log(schedules)  
             }
         } else {
             console.log('We had a problem to connect with PHP')
@@ -70,10 +69,10 @@ function displayDays(dmonth,dyear){
     const weekday= ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
 
     /* variables to controel calendar bliud */
-    let dateInital = new Date(dyear, dmonth,)
-    let lastDaypreviousMonth = new Date(year, month, 0).getDate();
+    let dateInitial = new Date(dyear, dmonth,)
+    // let lastDaypreviousMonth = new Date(year, month, 0).getDate();
     let lastDayCurrentMonth = new Date(year, month+1, 0).getDate();
-    let weekDayInitial = dateInital.getDay() 
+    let weekDayInitial = dateInitial.getDay() 
 
     /* clear the body calendar to load a now month */
     $("#calendarBody").empty();
@@ -82,27 +81,27 @@ function displayDays(dmonth,dyear){
     let loopLastMonth = weekDayInitial
     let loopCurrentMonth = weekDayInitial + lastDayCurrentMonth
   
-    let date
-    let dnone
+    let dateStartDay
+    let actualMonth
     for (let index = 1; index <= 42; index ++) {
         if( loopLastMonth > 0){
-            date = new Date(dyear,dmonth,- loopLastMonth + 1)
+            dateStartDay = new Date(dyear,dmonth,- loopLastMonth + 1)
             dateEndDay =  new Date(dyear,dmonth,- loopLastMonth + 2)
-            dnone = true
+            actualMonth = false
             loopLastMonth --
         } else if (index > weekDayInitial && index <= loopCurrentMonth){ 
-            date = new Date(dyear,dmonth, index - weekDayInitial)
+            dateStartDay = new Date(dyear,dmonth, index - weekDayInitial)
             dateEndDay =  new Date(dyear,dmonth, index - weekDayInitial + 1)
-            dnone = false
+            actualMonth = true
         } else {
-            date = new Date(dyear,dmonth, index - weekDayInitial)
+            dateStartDay = new Date(dyear,dmonth, index - weekDayInitial)
             dateEndDay =  new Date(dyear,dmonth, index - weekDayInitial + 1)
-            dnone = true
+            actualMonth = false
         }
         /* create alementes DOm */
         let div = document.createElement("div")
         div.classList.add('day', 'col-sm', 'p-2', 'border', 'border-left-0', 'border-top-0', 'text-truncate')
-        if(dnone == true){
+        if(actualMonth == false){
             div.classList.add('d-none', 'd-sm-inline-block', 'bg-light', 'text-muted') // set conditions to hidden on display week
         } 
         let h5 = document.createElement("h5")
@@ -110,35 +109,54 @@ function displayDays(dmonth,dyear){
             /* those element it gonna be a children's of h5 */
             let span1 = document.createElement("span")
             span1.classList.add('date', 'col-1')
-            span1.innerHTML = date.getDate() // set days
+            span1.innerHTML = dateStartDay.getDate() // set days
+            span1.setAttribute("onclick",'') // new task clicking on the day
+            span1.setAttribute("data-bs-toggle","modal") // open modal to create new schedules
+            span1.setAttribute("data-bs-target","#createSchedule")
+            span1.setAttribute("value",dateStartDay)
+
             let small = document.createElement("small")
             small.classList.add('col', 'd-sm-none', 'text-center', 'text-muted')
-            small.innerHTML = weekday[date.getDay()] // set week day
+            small.innerHTML = weekday[dateStartDay.getDay()] // set week day
             let span2 = document.createElement("span")
             span2.classList.add('col-1')
-        
-        /* load a schedule from date base */
-        let p = document.createElement("p")
-        p.classList.add('d-sm-none')
-        p.innerHTML = 'No events'
-
-        /* append elementes created to the DOM */
-        h5.append(span1)
-        h5.append(small)
-        h5.append(span2)
-        div.append(h5)
-        
-        /* getting schedules from data base */
+            
+            /* load a schedule from date base */
+            let p = document.createElement("p")
+            p.classList.add('d-sm-none')
+            p.innerHTML = 'No events'
+            
+            /* append elementes created to the DOM */
+            // h5.append(input)
+            h5.append(span1)
+            h5.append(small)
+            h5.append(span2)
+            div.append(h5)
+            
+            
+        /* setting schedules from database */
             if (ready){
                 schedules.forEach(disablingDates)
                 function disablingDates(item, index) {
+                    /* formating dates */
                     scheduleStart = new Date(Date.parse(item['datetimeStart']))
                     scheduleEnd = new Date(Date.parse(item['datetimeEnd']))
+                    title = item['title']
                     description = item['description']
-                    if( date <= scheduleStart && scheduleStart <= dateEndDay ){
+                    /* verification to set each task on right day */
+                    if( dateStartDay <= scheduleEnd && scheduleStart <= dateEndDay){
                         let a = document.createElement("a")
                         a.classList.add('event', 'd-block', 'p-1', 'pl-2', 'pr-2', 'mb-1', 'rounded', 'text-truncate', 'small', 'bg-info', 'text-white')
-                        a.innerHTML = formatHour(scheduleStart) +' '+ formatHour(scheduleEnd) +' '+ description
+                        a.innerHTML = ''
+                        if(dateStartDay <= scheduleStart && scheduleStart <= dateEndDay ){
+                            a.innerText += formatHour(scheduleStart) + ' '                        }
+                        a.innerText += title
+                        if(dateStartDay <= scheduleEnd && scheduleEnd <= dateEndDay) {
+                            a.innerText += ' ' + formatHour(scheduleEnd)
+                        }
+                        a.setAttribute("data-bs-toggle", "modal")
+                        a.setAttribute("data-bs-target", "#showTask")
+                        a.setAttribute('onclick',`showTaskModal(${index})`)
                         div.append(a)
                     }
                 }
@@ -173,3 +191,34 @@ function formatHour(hourToFormat) {
     var s = addZero(d.getSeconds());
     return h + ":" + m;
 }
+
+function setDateModal(dateToSet){
+    console.log(dateToSet)
+}
+function showTaskModal(index){
+    document.querySelector("#showtitle").innerHTML = schedules[index]['title']
+    document.querySelector("#showDates").innerHTML = schedules[index]['datetimeStart']+' '+schedules[index]['datetimeEnd'] 
+    document.querySelector("#showDescription").innerHTML = schedules[index]['description']
+}
+
+/* setting min to date end  */
+document.querySelector("#dateStart").addEventListener("focusout", () =>{
+    let dateMin = document.querySelector("#dateStart").value
+    document.querySelector("#dateEnd").setAttribute("min",dateMin)
+    document.querySelector("#dateEnd").setAttribute("value",dateMin)
+})
+/* setting max hour to hour start */
+// desenvolver
+
+/* setting max to date start */
+document.querySelector("#dateEnd").addEventListener("focusout", () =>{
+    let dateMax = document.querySelector("#dateEnd").value
+    document.querySelector("#dateStart").setAttribute("max",dateMax)
+})
+/* setting min hour to hour end */
+document.querySelector("#hourStart").addEventListener("focusout", () =>{
+    let hourMin = document.querySelector("#hourStart").value
+    document.querySelector("#hourEnd").setAttribute("min",hourMin)
+    document.querySelector("#hourEnd").setAttribute("value",hourMin)
+})
+// desenvolver

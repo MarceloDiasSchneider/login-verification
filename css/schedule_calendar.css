@@ -17,3 +17,6 @@
         min-height: 6.0vw;
     }
 }
+body {
+    min-width: 400px;
+}

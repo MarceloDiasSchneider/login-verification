@@ -1,26 +1,30 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-row-reverse ">
+        <div class="col-md-6">
+            <nav class="nav nav-pills flex-column flex-sm-row gap-2 mb-2 ">
+                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="schedule_calendar.php">Calendar</a>
+                <!-- <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="schedule.php">Schedules</a> -->
+                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="my_profile.php">Profile</a>
+                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="menu.php">Menu</a>
+                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="session_close.php">Logout</a>
+            </nav>
+        </div>
+        <div class="col-md-6">
             <a class="navbar-brand" href="#">Toolbar nave</a>
-            <div class="container d-flex flex-row-reverse">
-                <div class="row">
-                    <div class="col-md">
-                        <a class="btn btn-primary" href="schedule_calendar.php" role="button">Calendar</a>
-                    </div>
-                    <div class="col-md">
-                        <a class="btn btn-primary" href="schedule.php" role="button">Schedule</a>
-                    </div>
-                    <div class="col-md">
-                        <a class="btn btn-primary" href="my_profile.php" role="button">Profile</a>
-                    </div>
-                    <div class="col-md">
-                        <a class="btn btn-primary" href="menu.php" role="button">Menu</a>
-                    </div>
-                    <div class="col-md">
-                        <a class="btn btn-primary" href="session_close.php" role="button">Logout</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </nav>
+    <!-- <div class="row bg-dark flex-row-reverse">
+        <div class="col-md-6">
+            <nav class="nav nav-pills flex-column flex-sm-row gap-2 mb-2 ">
+                <a class="flex-sm-fill text-sm-center nav-link active" href="schedule_calendar.php">Calendar</a>
+                <a class="flex-sm-fill text-sm-center nav-link active" href="schedule.php">Schedules</a>
+                <a class="flex-sm-fill text-sm-center nav-link active" href="my_profile.php">Profile</a>
+                <a class="flex-sm-fill text-sm-center nav-link active" href="menu.php">Menu</a>
+                <a class="flex-sm-fill text-sm-center nav-link active" href="session_close.php">Logout</a>
+            </nav>
+        </div>
+        <div class="col-md-6">
+            <a class="navbar-brand" href="#">Toolbar nave</a>
+        </div>
+    </div> -->
 </header>

@@ -1,5 +1,5 @@
 <?php
-
+    /* date came from schedules_datepicker.js as POST */
     $id_user = $_POST['id'];
     $initial = $_POST['i'];
     $final = $_POST['f'];
