@@ -2,11 +2,11 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-row-reverse ">
         <div class="col-md-6">
             <nav class="nav nav-pills flex-column flex-sm-row gap-2 mb-2 ">
-                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="schedule_calendar.php">Calendar</a>
-                <!-- <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="schedule.php">Schedules</a> -->
-                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="my_profile.php">Profile</a>
-                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="menu.php">Menu</a>
-                <a class="flex-sm-fill text-sm-center nav-link active d-none d-sm-inline-block" href="session_close.php">Logout</a>
+                <a class="flex-sm-fill text-sm-center nav-link active" href="schedule_calendar.php">Calendar</a>
+                <!-- <a class="flex-sm-fill text-sm-center nav-link active" href="schedule.php">Schedules</a> -->
+                <a class="flex-sm-fill text-sm-center nav-link active" href="my_profile.php">Profile</a>
+                <a class="flex-sm-fill text-sm-center nav-link active" href="menu.php">Menu</a>
+                <a class="flex-sm-fill text-sm-center nav-link active" href="session_close.php">Logout</a>
             </nav>
         </div>
         <div class="col-md-6">
