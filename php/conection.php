@@ -1,15 +1,15 @@
 <?php
     /* info to conect to database LOCALHOST*/
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "login";
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "login";
     
     /* info to conect to database ONLINE*/
-    // $servername = "107.180.25.194";
-    // $username = "MarceloSchneider";
-    // $password = "pfekr3sJ22VjzH8";
-    // $dbname = "login";
+    $servername = "107.180.25.194";
+    $username = "MarceloSchneider";
+    $password = "pfekr3sJ22VjzH8";
+    $dbname = "login";
 
     /* test of conection with database */
     try {
